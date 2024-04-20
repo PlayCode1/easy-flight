@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1l1fhon3lgnq"]
+
+[ext_resource type="Script" path="res://Menu/GameMenu.cs" id="1_dowtm"]
+[ext_resource type="FontFile" uid="uid://b86bqtvgfjd6n" path="res://Font/Bungee-Regular.ttf" id="2_xccst"]
+[ext_resource type="Script" path="res://Menu/MaxScore.cs" id="3_0r2ll"]
+
+[node name="GameMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_dowtm")
+
+[node name="MaxScore" type="Label" parent="."]
+layout_mode = 2
+offset_left = 18.0
+offset_top = 24.0
+offset_right = 251.0
+offset_bottom = 57.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_xccst")
+theme_override_font_sizes/font_size = 32
+text = "HIGH SCORE: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_0r2ll")
+
+[node name="Version" type="Label" parent="."]
+layout_mode = 2
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -115.0
+offset_top = 22.0
+offset_right = -30.0
+offset_bottom = 45.0
+size_flags_horizontal = 4
+text = "Alpha 0.0.1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Container2" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -301.0
+offset_top = -58.0
+offset_right = 301.0
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Quit" type="Label" parent="Container2"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "WASD   [Q] - Quit   [M] - Mute   [F] - Full/Window   [R] - Retro   [ESC] - Hide help"
+horizontal_alignment = 1
+vertical_alignment = 1

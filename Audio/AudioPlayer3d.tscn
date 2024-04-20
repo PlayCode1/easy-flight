@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dckjo3q0x0xbn"]
+
+[ext_resource type="Script" path="res://Audio/AudioPlayer3d.cs" id="1_b405p"]
+
+[node name="AudioPlayer3d" type="Node3D"]
+script = ExtResource("1_b405p")
+
+[node name="Player3D" type="AudioStreamPlayer3D" parent="."]
+
+[connection signal="finished" from="Player3D" to="." method="OnFinished"]

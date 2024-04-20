@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://d2mi2jnte6ngy"]
+
+[sub_resource type="Gradient" id="Gradient_fij17"]
+offsets = PackedFloat32Array(0.21519, 0.721519)
+colors = PackedColorArray(0.426386, 0.308893, 0.211598, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kfrt4"]
+gradient = SubResource("Gradient_fij17")
+
+[sub_resource type="Curve" id="Curve_up1oe"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.3879, 0.768421), 0.0, 0.0, 0, 0, Vector2(1, 0.0842105), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_0l8bu"]
+curve = SubResource("Curve_up1oe")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s1yme"]
+emission_shape = 1
+emission_sphere_radius = 0.1
+angle_max = 186.7
+initial_velocity_max = 1.1
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_0l8bu")
+color = Color(0.878431, 0.498039, 0.207843, 1)
+color_ramp = SubResource("GradientTexture1D_kfrt4")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4aetj"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_33oyj"]
+lightmap_size_hint = Vector2i(17, 9)
+material = SubResource("StandardMaterial3D_4aetj")
+
+[node name="Explosion" type="Node3D"]
+top_level = true
+
+[node name="Accelerator" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, -1.50996e-07, 0, 1.50996e-07, -1, 0.000758501, 0.00339815, 0.0918988)
+amount = 100
+lifetime = 2.9
+speed_scale = 5.05
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_s1yme")
+draw_pass_1 = SubResource("SphereMesh_33oyj")

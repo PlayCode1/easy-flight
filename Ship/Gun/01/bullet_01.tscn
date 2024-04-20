@@ -1,0 +1,80 @@
+[gd_scene load_steps=14 format=3 uid="uid://c5qo410mxs0hj"]
+
+[ext_resource type="Script" path="res://Ship/Gun/01/Bullet01.cs" id="1_q3jgb"]
+[ext_resource type="AudioStream" uid="uid://dh6pi4qi4sxik" path="res://Audio/Sound/Explosion/the-noise-of-an-old-shell-explosion.mp3" id="2_3i7iq"]
+[ext_resource type="Material" uid="uid://3jddimm2qa68" path="res://Material/Building.tres" id="2_5x6to"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rahdi"]
+material = ExtResource("2_5x6to")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_e8s04"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="Gradient" id="Gradient_4jvwd"]
+colors = PackedColorArray(0.702668, 0.45191, 0.222684, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_d8re2"]
+gradient = SubResource("Gradient_4jvwd")
+
+[sub_resource type="Curve" id="Curve_utto6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.3879, 0.768421), 0.0, 0.0, 0, 0, Vector2(1, 0.0842105), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_iabor"]
+curve = SubResource("Curve_utto6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_30jk4"]
+emission_shape = 1
+emission_sphere_radius = 0.1
+angle_max = 186.7
+scale_min = 0.7
+scale_curve = SubResource("CurveTexture_iabor")
+color = Color(0.847059, 0.470588, 0.176471, 1)
+color_ramp = SubResource("GradientTexture1D_d8re2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l87gx"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_qoxdy"]
+lightmap_size_hint = Vector2i(17, 9)
+material = SubResource("StandardMaterial3D_l87gx")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gxcfn"]
+size = Vector3(1, 1, 3.55371)
+
+[node name="Bullet_01" type="CharacterBody3D"]
+top_level = true
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("1_q3jgb")
+ExplosionSound = ExtResource("2_3i7iq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0529549, 0, 0, 0, 0.0338754, 0, 0, 0, 0.418299, 0, -0.000591002, -0.210392)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_rahdi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.0529549, 0, 0, 0, 0.0338754, 0, 0, 0, 0.418299, 0, -0.000591002, -0.210392)
+shape = SubResource("ConvexPolygonShape3D_e8s04")
+
+[node name="Accelerator" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.073, 0, 0, 0, -3.19093e-09, 0.073, 0, -0.073, -3.19093e-09, 0.000758501, 0.00339815, 0.0918988)
+amount = 100
+lifetime = 3.55
+speed_scale = 6.14
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_30jk4")
+draw_pass_1 = SubResource("SphereMesh_qoxdy")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(0.19, 0, 0, 0, 0.19, 0, 0, 0, 0.19, 0, 0, -0.592603)
+shape = SubResource("BoxShape3D_gxcfn")
+
+[connection signal="body_entered" from="Area3D" to="." method="OnWall"]

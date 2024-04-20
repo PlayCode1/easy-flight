@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=3 uid="uid://g48jtv1exb2t"]
+
+[ext_resource type="Script" path="res://Tile/BaseTile.cs" id="1_bt6dc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xv5he"]
+size = Vector3(10, 6.62641, 0.001)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r0hgy"]
+size = Vector3(0.001, 7.05094, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m2b7h"]
+albedo_color = Color(0.982685, 0.29763, 0.273023, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_j3efj"]
+material = SubResource("StandardMaterial3D_m2b7h")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_djkh6"]
+albedo_color = Color(0.633757, 0.633757, 0.633757, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_11rtw"]
+material = SubResource("StandardMaterial3D_djkh6")
+
+[node name="BaseTile" type="Node3D"]
+script = ExtResource("1_bt6dc")
+
+[node name="ForwardArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.175, 5)
+collision_layer = 0
+collision_mask = 512
+monitorable = false
+priority = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ForwardArea"]
+transform = Transform3D(1, 0, 0, 0, 11.1855, 0, 0, 0, 1, 0, 0.17654, 0)
+shape = SubResource("BoxShape3D_xv5he")
+
+[node name="RightArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 0)
+collision_layer = 0
+collision_mask = 512
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RightArea"]
+transform = Transform3D(1, 0, 0, 0, 11.1855, 0, 0, 0, 1, 0, 1.4641, 0)
+shape = SubResource("BoxShape3D_r0hgy")
+
+[node name="LeftArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, 0)
+collision_layer = 0
+collision_mask = 512
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeftArea"]
+transform = Transform3D(1, 0, 0, 0, 11.1855, 0, 0, 0, 1, 0, 1.4641, 0)
+shape = SubResource("BoxShape3D_r0hgy")
+
+[node name="Platform" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0.501061, 0)
+visible = false
+mesh = SubResource("BoxMesh_j3efj")
+skeleton = NodePath("../ForwardArea")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+
+[node name="Debug" type="Node3D" parent="."]
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Debug"]
+transform = Transform3D(-0.0226873, 0.999743, 0, -0.999743, -0.0226873, 0, 0, 0, 1, 2, 1, 0)
+mesh = SubResource("CapsuleMesh_11rtw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Debug"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 6, 4)
+mesh = SubResource("CapsuleMesh_11rtw")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Debug"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 6, -4)
+mesh = SubResource("CapsuleMesh_11rtw")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Debug"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.001, 6, -4)
+mesh = SubResource("CapsuleMesh_11rtw")
+
+[connection signal="body_exited" from="ForwardArea" to="." method="OnForwardExited"]
+[connection signal="body_exited" from="RightArea" to="." method="OnRightExited"]
+[connection signal="body_exited" from="LeftArea" to="." method="OnLeftExited"]
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

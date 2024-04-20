@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxalwtfq455oh"]
+
+[ext_resource type="Script" path="res://Ship/Generator/02/Generator02.cs" id="1_lj4ne"]
+
+[node name="Generator_02" type="Node3D"]
+script = ExtResource("1_lj4ne")

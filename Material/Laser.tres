@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://botbeankutbli"]
+
+[resource]
+transparency = 1
+vertex_color_is_srgb = true
+albedo_color = Color(1, 1, 1, 0.270588)
+emission_enabled = true
+emission = Color(0.92562, 0.663819, 0.474687, 1)
+emission_energy_multiplier = 16.0

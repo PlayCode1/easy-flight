@@ -1,0 +1,11 @@
+<Project Sdk="Godot.NET.Sdk/4.2.1">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <RootNamespace>App</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Blender\" />
+    <Folder Include="Lib\Concave\" />
+  </ItemGroup>
+</Project>

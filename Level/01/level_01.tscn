@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://b0vwchfi1j78u"]
+
+[ext_resource type="Script" path="res://Level/01/Level01.cs" id="1_neg8a"]
+[ext_resource type="AudioStream" uid="uid://cyp52wnyq56kk" path="res://Audio/Music/ShipFlyThemeProb.ogg" id="4_4fwf4"]
+[ext_resource type="PackedScene" uid="uid://ib0byae5qtua" path="res://Audio/AudioPlayer.tscn" id="7_66fkf"]
+[ext_resource type="AudioStream" uid="uid://ckbudbmjf1s46" path="res://Audio/Sound/Ambient/Wind Effect.ogg" id="8_l35rp"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_xgo81"]
+turbidity = 340.19
+ground_color = Color(0.411765, 0.321569, 0.215686, 1)
+energy_multiplier = 2.21
+
+[sub_resource type="Sky" id="Sky_tlmkj"]
+sky_material = SubResource("PhysicalSkyMaterial_xgo81")
+
+[sub_resource type="Environment" id="Environment_kclnm"]
+background_mode = 2
+sky = SubResource("Sky_tlmkj")
+sky_rotation = Vector3(0, -0.102974, 0)
+glow_enabled = true
+fog_light_energy = 1.28
+fog_sun_scatter = 0.35
+fog_density = 0.1504
+volumetric_fog_enabled = true
+volumetric_fog_ambient_inject = 1.0
+volumetric_fog_temporal_reprojection_enabled = false
+
+[node name="Level_01" type="Node3D"]
+script = ExtResource("1_neg8a")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kclnm")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.922775, 0.244331, -0.297973, 0.071386, 0.868284, 0.490904, 0.378668, 0.431723, -0.818673, -11.9154, 8.7901, -1.54842)
+shadow_enabled = true
+
+[node name="Audio" type="Node3D" parent="."]
+
+[node name="AmbientPlayer" parent="Audio" instance=ExtResource("7_66fkf")]
+sounds = Array[AudioStream]([ExtResource("8_l35rp")])
+bus = 3
+
+[node name="MusicPlayer" parent="Audio" instance=ExtResource("7_66fkf")]
+sounds = Array[AudioStream]([ExtResource("4_4fwf4")])
+bus = 1

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgtunyh68knlp"]
+
+[ext_resource type="Script" path="res://Ship/Gun/01/Gun01.cs" id="1_ikium"]
+[ext_resource type="AudioStream" uid="uid://5ejju6rkmvs6" path="res://Audio/Sound/Gun/the-aliens-started-firing-their-weapons.mp3" id="2_dwjyq"]
+
+[node name="Gun_01" type="Node3D"]
+script = ExtResource("1_ikium")
+FireSound = ExtResource("2_dwjyq")

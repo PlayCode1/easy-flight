@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7gwj2lp5qwbr"]
+
+[ext_resource type="Material" uid="uid://3jddimm2qa68" path="res://Material/Building.tres" id="1_gynni"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_a03sg"]
+material = ExtResource("1_gynni")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_gmc2v"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[node name="Tower" type="StaticBody3D"]
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 15, 0, 0, 0, 2, 0, -6.15552, 0)
+mesh = SubResource("BoxMesh_a03sg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 15, 0, 0, 0, 2, 0, -6.15552, 0)
+shape = SubResource("ConvexPolygonShape3D_gmc2v")

@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dyxdxk5278h3r"]
+
+[ext_resource type="Shader" path="res://Shaders/shield2.gdshader" id="1_1emsf"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_1emsf")
+shader_parameter/albedo = Color(0.796078, 0.498039, 0.211765, 1)
+shader_parameter/emission_color = Color(0.968627, 0.647059, 0.352941, 1)
+shader_parameter/emission_amount = 9.779
+shader_parameter/rim_steepness = 3.0
+shader_parameter/uv_scale = null
+shader_parameter/uv_offset = null
